@@ -57,28 +57,32 @@ La información contenida en la muestra es la siguiente:
 """
 
 import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegressionCV
+from sklearn.preprocessing import OneHotEncoder
+from sklearn.pipeline import Pipeline
+from sklearn.metrics import confusion_matrix
 
 
 def pregunta_01():
     """
     En esta función se realiza la carga de datos.
     """
-    # Lea el archivo `mushrooms.csv` y asignelo al DataFrame `df`
-    df = ____
+    # Lea el archivo `mushrooms.csv` y asígnelo al DataFrame `df`
+    df = pd.read_csv('mushrooms.csv')
 
-    # Remueva la columna `veil-type` del DataFrame `df`.
+    # Remueva la columna `veil_type` del DataFrame `df`.
     # Esta columna tiene un valor constante y no sirve para la detección de hongos.
-    ____.____(____)
+    df.drop('veil_type', axis=1, inplace=True)
 
     # Asigne la columna `type` a la variable `y`.
-    ____ = ____
+    y = df['type']
 
     # Asigne una copia del dataframe `df` a la variable `X`.
-    ____ = ____.____(____)
+    X = df.copy()
 
     # Remueva la columna `type` del DataFrame `X`.
-    ____.____(____)
-
+    X.drop('type', axis=1, inplace=True)
     # Retorne `X` y `y`
     return X, y
 
